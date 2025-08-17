@@ -2,9 +2,9 @@ name: Deploy Backend
 
 on:
   push:
-    paths:
-      - 'my-portfolio-be/**'
-      - '.github/workflows/deploy-backend.yml'
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
