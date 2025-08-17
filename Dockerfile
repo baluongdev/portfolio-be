@@ -20,5 +20,7 @@ RUN composer install --no-dev --optimize-autoloader
 # Phân quyền cho Laravel
 RUN chown -R www-data:www-data storage bootstrap/cache
 
+EXPOSE 9000
+
 # FPM sẽ chạy, Nginx sẽ proxy vào
 CMD ["php-fpm"]
