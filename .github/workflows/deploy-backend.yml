@@ -28,12 +28,12 @@ jobs:
 
       - name: Copy files to VPS.
         run: |
-          rsync -avz --delete . ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}
+          rsync -avz --delete . ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/be
 
       - name: Build & run Docker on VPS
         run: |
           ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
-            cd ../home/root
+            cd ../home/root/be
             docker compose down || true 
             docker compose up -d --build
           EOF
