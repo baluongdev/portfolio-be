@@ -28,7 +28,7 @@ jobs:
 
       - name: Copy files to VPS.
         run: |
-          rsync -avz --delete ./my-portfolio-backend ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}
+          rsync -avz --delete ./be ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}
 
       - name: Build & run Docker on VPS
         run: |
