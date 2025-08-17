@@ -12,7 +12,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/portfolio-be
 
 # Copy code vào container
-COPY . .
+COPY ./portfolio-be .
 
 # Cài vendor
 RUN composer install --no-dev --optimize-autoloader
