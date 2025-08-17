@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+    container_name: laravel
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www/
+    depends_on:
+      - db
+    networks:
+      - be-network
+
+  db:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_DB: portfolio
+      POSTGRES_USER: baluongdev
+      POSTGRES_PASSWORD: Ba18112000@@
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - be-network
+
+volumes:
+  pgdata:
+
+networks:
+  be-network:
+    external: true
