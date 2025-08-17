@@ -1,6 +1,6 @@
 FROM php:8.2-fpm
 
-# Cài extension PHP
+# Cài extension PHP cần thiết
 RUN apt-get update && apt-get install -y \
     git curl zip unzip libpq-dev libzip-dev \
     && docker-php-ext-install pdo pdo_pgsql zip
@@ -8,10 +8,17 @@ RUN apt-get update && apt-get install -y \
 # Cài Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Làm việc tại thư mục dự án
+# Set thư mục làm việc
 WORKDIR /var/www/portfolio-be
 
-# Mở cổng Laravel
-EXPOSE 8000
+# Copy code vào container
+COPY . .
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# Cài vendor
+RUN composer install --no-dev --optimize-autoloader
+
+# Phân quyền cho Laravel
+RUN chown -R www-data:www-data storage bootstrap/cache
+
+# FPM sẽ chạy, Nginx sẽ proxy vào
+CMD ["php-fpm"]
