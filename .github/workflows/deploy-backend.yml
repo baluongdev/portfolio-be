@@ -34,6 +34,6 @@ jobs:
         run: |
           ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
             cd ../home/root
-            docker compose down laravel || true 
-            docker compose up -d laravel --build
+            docker compose down || true 
+            docker compose up -d --build
           EOF
